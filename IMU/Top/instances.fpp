@@ -107,9 +107,9 @@ module IMU {
   }
 
   @ I2C Driver
-  instance i2c: Drv.LinuxI2cDriver base id 0x4C00 {
+  instance accelGyroI2cBus: Drv.LinuxI2cDriver base id 0x4C00 {
     phase Fpp.ToCpp.Phases.configComponents """
-    if (!i2c.open("/dev/i2c-2")) {
+    if (!accelGyroI2cBus.open("/dev/i2c-2")) {
       Fw::Logger::log("[ERROR] Failed to open I2C device\\n");
     }
     """

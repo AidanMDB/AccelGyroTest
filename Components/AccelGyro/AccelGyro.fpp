@@ -33,6 +33,13 @@ module Components {
         # Events
         #------------------------------------------------------------------------------
 
+        @ Logging for debugging
+        event Debugg(
+            messageStatus: string @< the message to log
+        ) \
+            severity activity high \
+            format "DEBUG: {}"
+
         @ Reports errors when requesting telemetry
         event TelemetryError(
             status: Drv.I2cStatus @< the status value returned

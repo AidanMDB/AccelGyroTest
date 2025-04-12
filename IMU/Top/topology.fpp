@@ -16,7 +16,7 @@ module IMU {
     # Instances used in the topology
     # ----------------------------------------------------------------------
     instance accelGyro
-    instance i2c
+    instance accelGyroI2cBus
     instance $health
     instance blockDrv
     instance tlmSend
@@ -100,6 +100,7 @@ module IMU {
       rateGroup1.RateGroupMemberOut[0] -> tlmSend.Run
       rateGroup1.RateGroupMemberOut[1] -> fileDownlink.Run
       rateGroup1.RateGroupMemberOut[2] -> systemResources.run
+      rateGroup1.RateGroupMemberOut[3] -> accelGyro.Run
 
       # Rate group 2
       rateGroupDriver.CycleOut[Ports_RateGroups.rateGroup2] -> rateGroup2.CycleIn
@@ -134,10 +135,10 @@ module IMU {
       fileUplink.bufferSendOut -> bufferManager.bufferSendIn
     }
 
-    connections IMU {
+    connections I2c {
       # Add here connections to user-defined components
-      accelGyro.read -> i2c.read
-      accelGyro.write -> i2c.write
+      accelGyro.read -> accelGyroI2cBus.read
+      accelGyro.write -> accelGyroI2cBus.write
     }
 
   }
